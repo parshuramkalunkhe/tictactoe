@@ -17,16 +17,15 @@ public class TicTacToe {
 
 		printBoard(board);
 
+		
 		while (true) {
 			Scanner scr = new Scanner(System.in);
-
-			System.out.print("Enter your position (1-9) : ");
-			int playerPos = scr.nextInt();
-
+			
+			int playerPos = playerPos(scr);
+			
 			while (playerPositions.contains(playerPos) || computerPositions.contains(playerPos)) {
 				System.out.println("Position take!");
-				System.out.print("Enter a Correct Position : ");
-				playerPos = scr.nextInt();
+				playerPos = playerPos(scr);
 			}
 			
 			placePosInBoard(board, playerPos, "player");
@@ -50,6 +49,19 @@ public class TicTacToe {
 			}
 			printBoard(board);
 		}
+	}
+	
+	public static int playerPos(Scanner scr) {
+		int playerPos = 0;
+		try {
+			System.out.print("Enter your position (1-9) : ");
+			playerPos = scr.nextInt();
+			
+		} catch (Exception e) {
+			System.out.println("Invalid Input.");
+			playerPos(new Scanner(System.in));
+		}
+		return playerPos;
 	}
 
 	public static void printBoard(char[][] board) {
